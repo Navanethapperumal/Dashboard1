@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <h2>Dashboard configuration - Test-1</h2>
+    <form #configForm="ngForm" >
+        Model values: {{configModel | json}}
+        Form values: {{configForm.value | json}}
+        <br>
+        <div class="form-group">
+            <label>setting 1</label>
+            <input #name type="text" required class="form-control" name="name" [(ngModel)]="configModel.name" >
+            <!-- <small class="text-danger" [class.d-none]="false">Name is required</small> -->
+          </div>
+
+          <div class="form-group">
+            <label>setting 2</label>
+            <input type="email" class="form-control" name="email"   [(ngModel)]="configModel.email" >
+          </div>
+      
+          <div class="form-group">
+            <label>setting 3</label>
+            <input type="tel" required pattern="^\d{10}$" class="form-control"  name="phone"   [(ngModel)]="configModel.phone" >
+            <!-- <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+              <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>      
+              <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must be 10 digits</small>      
+            </div> -->
+          </div>
+      
+          <div class="form-group">
+            <select class="custom-select" name="topic"   [(ngModel)]="configModel.topic" >
+              <option value="default">Back-up type</option>
+              <option *ngFor="let topic of topics">{{ topic }}</option>
+            </select>
+            <!-- <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">Please choose a topic</small>       -->
+          </div>
+      
+          <div class="mb-3">
+            <label>Down time</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="timePreference" value="morning"   [(ngModel)]="configModel.timePreference" >
+              <label class="form-check-label">Morning (9AM - 12PM)</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="timePreference" value="evening"   [(ngModel)]="configModel.timePreference" >
+              <label class="form-check-label">Evening (5PM - 8PM)</label>
+            </div>
+          </div>
+      
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="subscribe"   [(ngModel)]="configModel.subscribe" >
+            <label class="form-check-label">
+              Send me downtime email alerts
+            </label>
+          </div>
+      
+          <button class="btn btn-primary" [disabled]="hasError" type="submit">Submit form</button>
+    </form>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+        errorMsg
+      </div>
+</div>
